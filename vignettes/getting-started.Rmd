@@ -1,0 +1,104 @@
+---
+title: "Getting started"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+# Chunks call the live Iconify API, so they only run when asked to
+# (the pkgdown workflow sets this variable).
+live <- identical(Sys.getenv("ICONIFYR_LIVE_VIGNETTES"), "true")
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = live)
+library(iconifyr)
+options(iconifyr.cache = FALSE)
+```
+
+iconifyr wraps the [Iconify API](https://iconify.design/docs/api/). Icons are
+identified as `prefix:name`, for example `mdi:home`.
+
+## Fetch an icon
+
+```{r get}
+svg <- iconify_get("mdi:home", color = "#ba3329", size = 48)
+cat(svg)
+```
+
+`color`, `size` (height in pixels), `flip` and `rotate` map to the API's query
+parameters.
+
+## Find icons
+
+```{r search}
+hits <- iconify_search("home", prefixes = c("mdi", "tabler"), limit = 40)
+head(hits)
+```
+
+```{r sets}
+sets <- iconify_sets()
+head(sets[order(-sets$total), ], 5)
+length(iconify_icons("tabler"))
+```
+
+## Inline icons in R Markdown and Quarto
+
+`iconify_html()` returns raw HTML, so it works in inline code. For example,
+`` `r knitr::inline_expr('iconifyr::iconify_html("mdi:github", size = 16)')` ``
+renders as `r if (live) iconifyr::iconify_html("mdi:github", size = 16)`.
+
+In a chunk, use `results = "asis"`:
+
+````markdown
+`r ''````{r, results = "asis"}
+iconifyr::iconify_html("mdi:home", color = "steelblue", size = 32)
+```
+````
+
+The same function works in Shiny UI code, e.g. `tags$button(iconify_html("mdi:refresh"), "Reload")`.
+
+## Icons in a gt table
+
+```{r gt, eval = live && requireNamespace("gt", quietly = TRUE)}
+ids <- c("mdi:home", "mdi:account", "mdi:cog")
+tbl <- data.frame(
+  id = ids,
+  icon = vapply(ids, function(x) as.character(iconify_get(x, size = 20)), ""),
+  stringsAsFactors = FALSE
+)
+gt::gt(tbl) |>
+  gt::fmt_markdown(columns = "icon")
+```
+
+## Icons in a ggplot
+
+`iconify_png()` renders through rsvg. To place an icon on a plot, rasterize the
+SVG and add it as an annotation.
+
+```{r ggplot, eval = live && requireNamespace("rsvg", quietly = TRUE) && requireNamespace("ggplot2", quietly = TRUE), fig.width = 4, fig.height = 3}
+svg <- iconify_get("mdi:star", color = "#e0a800", size = 128)
+img <- rsvg::rsvg_nativeraster(charToRaw(svg), width = 128)
+grob <- grid::rasterGrob(img, interpolate = TRUE)
+
+ggplot2::ggplot(data.frame(x = 1:3, y = c(2, 3, 5)), ggplot2::aes(x, y)) +
+  ggplot2::geom_line() +
+  ggplot2::annotation_custom(grob, xmin = 1, xmax = 1.5, ymin = 4, ymax = 5) +
+  ggplot2::theme_minimal()
+```
+
+## Save icons
+
+```{r download}
+paths <- iconify_download(c("mdi:home", "tabler:star"), dir = tempdir())
+basename(paths)
+```
+
+## Caching, retries and self-hosting
+
+- Responses are cached under `tools::R_user_dir("iconifyr", "cache")`. Turn
+  this off with `options(iconifyr.cache = FALSE)`; wipe it with
+  `iconify_cache_clear()`.
+- Requests retry up to 3 times on HTTP 429 and 5xx.
+- Point the package at a self-hosted API with
+  `options(iconifyr.api = "https://icons.example.org")`.
