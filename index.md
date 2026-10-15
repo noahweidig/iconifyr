@@ -61,7 +61,9 @@ save files with
 or render a PNG with
 [`iconify_png()`](https://noahweidig.github.io/iconifyr/reference/iconify_png.md).
 See
-[`vignette("getting-started")`](https://noahweidig.github.io/iconifyr/articles/getting-started.md).
+[`vignette("getting-started")`](https://noahweidig.github.io/iconifyr/articles/getting-started.md)
+and the [icon
+gallery](https://noahweidig.github.io/iconifyr/articles/icon-gallery.html).
 
 ## Options
 
