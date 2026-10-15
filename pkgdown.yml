@@ -1,0 +1,10 @@
+pandoc: 3.8.3
+pkgdown: 2.2.1
+pkgdown_sha: ~
+articles:
+  getting-started: getting-started.html
+  licensing: licensing.html
+last_built: 2026-10-15T19:30Z
+urls:
+  reference: https://noahweidig.github.io/iconifyr/reference
+  article: https://noahweidig.github.io/iconifyr/articles
