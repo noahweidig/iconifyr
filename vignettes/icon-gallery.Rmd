@@ -8,20 +8,55 @@ vignette: >
 ---
 
 ```{r setup, include = FALSE}
-# Chunks call the live Iconify API, so they only run when asked to
-# (the pkgdown workflow sets this variable).
-live <- identical(Sys.getenv("ICONIFYR_LIVE_VIGNETTES"), "true")
-knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = live)
 library(iconifyr)
 library(htmltools)
-# Responses are cached on disk, so rebuilding the site reuses them.
-sets <- if (live) iconify_sets()
 
-icon_cell <- function(id, size = 40, ...) {
+# The icons on this page were fetched with iconify_get() and stored in
+# gallery-snapshot.json, so building the site makes no API calls (the public
+# API rate limits shared CI addresses). To refresh the snapshot, run
+#   ICONIFYR_RECORD_GALLERY=true Rscript -e 'rmarkdown::render("vignettes/icon-gallery.Rmd")'
+store_file <- "gallery-snapshot.json"
+record <- identical(Sys.getenv("ICONIFYR_RECORD_GALLERY"), "true")
+live <- identical(Sys.getenv("ICONIFYR_LIVE_VIGNETTES"), "true")
+store <- if (file.exists(store_file) && !record) {
+  jsonlite::fromJSON(store_file, simplifyVector = TRUE)
+} else {
+  list()
+}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = record || live || length(store) > 0)
+
+# Return a stored value, or fetch it (and store it when recording).
+snap <- function(key, fetch) {
+  if (is.null(store[[key]])) {
+    store[[key]] <<- fetch()
+    if (record) {
+      options(iconifyr.cache = FALSE)
+      jsonlite::write_json(store, store_file, auto_unbox = TRUE, pretty = TRUE)
+    }
+  }
+  store[[key]]
+}
+
+sets_used <- c(
+  "mdi", "tabler", "lucide", "ph", "bi", "carbon", "fa6-solid",
+  "fa6-brands", "simple-icons", "logos", "twemoji", "flat-color-icons"
+)
+sets <- if (knitr::opts_chunk$get("eval")) {
+  snap("sets", function() {
+    all <- iconify_sets()
+    all[match(sets_used, all$prefix), ]
+  })
+}
+
+icon_cell <- function(id, size = 40, color = NULL, flip = NULL, rotate = NULL) {
+  key <- paste(id, size, color, flip, rotate, sep = "|")
+  svg <- snap(key, function() {
+    iconify_get(id, size = size, color = color, flip = flip, rotate = rotate)
+  })
   tags$span(
     title = id,
     style = "display: inline-block; margin: 0 0.6em 0.4em 0;",
-    iconify_html(id, size = size, ...)
+    HTML(svg)
   )
 }
 
@@ -42,9 +77,9 @@ gallery <- function(spec) {
 }
 ```
 
-Iconify hosts 240+ icon sets behind one API. Every icon below was fetched live
-with `iconify_html()`. Hover over an icon to see its id; pass it to
-`iconify_get()` to get the SVG.
+Iconify hosts 240+ icon sets behind one API. The icons below come from 12 of
+them, each fetched with `iconify_get()`. Hover over an icon to see its id. The
+table helper (`gallery()`) is defined in this article's source.
 
 ## Same idea, different sets
 
@@ -108,11 +143,23 @@ iconify_html("mdi:rocket-launch", color = "#8d5fd3", rotate = 90)
 
 ## Pick an icon from search results
 
-```{r search}
+```r
 hits <- iconify_search("rocket", prefixes = c("mdi", "tabler", "ph", "lucide"), limit = 32)
 head(hits, 8)
+```
 
-tags$div(lapply(head(hits$id, 8), icon_cell, size = 36))
+```{r search, echo = FALSE}
+ids <- snap("search:rocket", function() {
+  iconify_search("rocket", prefixes = c("mdi", "tabler", "ph", "lucide"), limit = 32)$id[1:8]
+})
+parts <- strsplit(ids, ":", fixed = TRUE)
+hits <- data.frame(
+  id = ids,
+  prefix = vapply(parts, `[`, "", 1),
+  name = vapply(parts, `[`, "", 2)
+)
+hits
+tags$div(lapply(ids, icon_cell, size = 36))
 ```
 
 ## Credits
@@ -121,11 +168,7 @@ Using an icon means following its set's license. `iconify_sets()` lists the
 license and author of every set, which is enough for a credit line:
 
 ```{r credits}
-sets_used <- c(
-  "mdi", "tabler", "lucide", "ph", "bi", "carbon", "fa6-solid",
-  "fa6-brands", "simple-icons", "logos", "twemoji", "flat-color-icons"
-)
-credits <- sets[match(sets_used, sets$prefix), ]
+credits <- sets
 credits$attribution <- ifelse(grepl("^(CC-BY|ODbL)", credits$license_spdx), "required", "-")
 credits[c("prefix", "name", "author", "license_title", "attribution")]
 ```
