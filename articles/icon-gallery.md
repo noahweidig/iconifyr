@@ -1,11 +1,10 @@
 # Icon gallery
 
-Iconify hosts 240+ icon sets behind one API. Every icon below was
-fetched live with
-[`iconify_html()`](https://noahweidig.github.io/iconifyr/reference/iconify_html.md).
-Hover over an icon to see its id; pass it to
-[`iconify_get()`](https://noahweidig.github.io/iconifyr/reference/iconify_get.md)
-to get the SVG.
+Iconify hosts 240+ icon sets behind one API. The icons below come from
+12 of them, each fetched with
+[`iconify_get()`](https://noahweidig.github.io/iconifyr/reference/iconify_get.md).
+Hover over an icon to see its id. The table helper (`gallery()`) is
+defined in this article’s source.
 
 ## Same idea, different sets
 
@@ -70,107 +69,6 @@ tags$div(
   icon_cell(id, color = "#8d5fd3", rotate = 90),
   icon_cell(id, color = "#264653", rotate = 180, flip = "vertical")
 )
-#> Waiting 300s for retry backoff ■                               
-#> Waiting 300s for retry backoff ■                               
-#> Waiting 300s for retry backoff ■■                              
-#> Waiting 300s for retry backoff ■■                              
-#> Waiting 300s for retry backoff ■■                              
-#> Waiting 300s for retry backoff ■■■                             
-#> Waiting 300s for retry backoff ■■■                             
-#> Waiting 300s for retry backoff ■■■                             
-#> Waiting 300s for retry backoff ■■■                             
-#> Waiting 300s for retry backoff ■■■■                            
-#> Waiting 300s for retry backoff ■■■■                            
-#> Waiting 300s for retry backoff ■■■■                            
-#> Waiting 300s for retry backoff ■■■■■                           
-#> Waiting 300s for retry backoff ■■■■■                           
-#> Waiting 300s for retry backoff ■■■■■                           
-#> Waiting 300s for retry backoff ■■■■■■                          
-#> Waiting 300s for retry backoff ■■■■■■                          
-#> Waiting 300s for retry backoff ■■■■■■                          
-#> Waiting 300s for retry backoff ■■■■■■                          
-#> Waiting 300s for retry backoff ■■■■■■■                         
-#> Waiting 300s for retry backoff ■■■■■■■                         
-#> Waiting 300s for retry backoff ■■■■■■■                         
-#> Waiting 300s for retry backoff ■■■■■■■■                        
-#> Waiting 300s for retry backoff ■■■■■■■■                        
-#> Waiting 300s for retry backoff ■■■■■■■■                        
-#> Waiting 300s for retry backoff ■■■■■■■■■                       
-#> Waiting 300s for retry backoff ■■■■■■■■■                       
-#> Waiting 300s for retry backoff ■■■■■■■■■                       
-#> Waiting 300s for retry backoff ■■■■■■■■■                       
-#> Waiting 300s for retry backoff ■■■■■■■■■■                      
-#> Waiting 300s for retry backoff ■■■■■■■■■■                      
-#> Waiting 300s for retry backoff ■■■■■■■■■■                      
-#> Waiting 300s for retry backoff ■■■■■■■■■■■                     
-#> Waiting 300s for retry backoff ■■■■■■■■■■■                     
-#> Waiting 300s for retry backoff ■■■■■■■■■■■                     
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■                    
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■                    
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■                    
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■                    
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■                   
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■                   
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■                   
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■                  
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■                  
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■                  
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■                 
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■                 
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■                 
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■                 
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■                
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■                
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■                
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■               
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■               
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■               
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■              
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■              
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■              
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■              
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■             
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■             
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■             
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■            
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■            
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■            
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■           
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■           
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■           
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■           
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■          
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■          
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■          
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■         
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■         
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■         
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■        
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■        
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■        
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■        
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■       
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■       
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■       
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■      
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■      
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■      
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■     
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■     
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■     
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■     
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■    
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■    
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■    
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> Waiting 300s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
 ```
 
 ![](data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld2JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZTYzOTQ2IiBkPSJtMTMuMTYgMjIuMTlsLTEuNjYtMy44NGMxLjYtLjU4IDMuMDctMS4zNSA0LjQzLTIuMjdsLTIuNzggNi4xMW0tNy41LTkuNjlsLTMuODQtMS42NWw2LjExLTIuNzhhMjAgMjAgMCAwIDAtMi4yNyA0LjQzTTIxLjY2IDIuMzVTMjMuNzggNy4zMSAxOC4xMSAxM2MtMi4yIDIuMTctNC41OCAzLjUtNi43MyA0LjM0Yy0uNzQuMjgtMS41Ny4xLTIuMTItLjQ2bC0yLjEzLTIuMTNjLS41Ni0uNTYtLjc0LTEuMzgtLjQ3LTIuMTNDNy41IDEwLjUgOC44MyA4LjA5IDExIDUuODlDMTYuNjkuMjE2IDIxLjY2IDIuMzUgMjEuNjYgMi4zNU02LjI1IDIySDQuODRsNC4wOS00LjFjLjMuMjEuNjMuMzYuOTcuNDV6TTIgMjJ2LTEuNDFsNC43Ny00Ljc4bDEuNDMgMS40MkwzLjQxIDIyem0wLTIuODR2LTEuNDFsMy42NS0zLjY1Yy4wOS4zNS4yNC42OC40NS45N3pNMTYgNmEyIDIgMCAxIDAgMCA0YzEuMTEgMCAyLS44OSAyLTJhMiAyIDAgMCAwLTItMiIgLz48L3N2Zz4=)
@@ -192,18 +90,17 @@ iconify_html("mdi:rocket-launch", color = "#8d5fd3", rotate = 90)
 
 hits <- iconify_search("rocket", prefixes = c("mdi", "tabler", "ph", "lucide"), limit = 32)
 head(hits, 8)
-#>                   id prefix           name
-#> 1         mdi:rocket    mdi         rocket
-#> 2 mdi:rocket-outline    mdi rocket-outline
-#> 3      tabler:rocket tabler         rocket
-#> 4      lucide:rocket lucide         rocket
-#> 5          ph:rocket     ph         rocket
-#> 6     ph:rocket-bold     ph    rocket-bold
-#> 7  ph:rocket-duotone     ph rocket-duotone
-#> 8     ph:rocket-fill     ph    rocket-fill
-
-tags$div(lapply(head(hits$id, 8), icon_cell, size = 36))
 ```
+
+    #>                   id prefix           name
+    #> 1         mdi:rocket    mdi         rocket
+    #> 2 mdi:rocket-outline    mdi rocket-outline
+    #> 3      tabler:rocket tabler         rocket
+    #> 4      lucide:rocket lucide         rocket
+    #> 5          ph:rocket     ph         rocket
+    #> 6     ph:rocket-bold     ph    rocket-bold
+    #> 7  ph:rocket-duotone     ph rocket-duotone
+    #> 8     ph:rocket-fill     ph    rocket-fill
 
 ![](data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNiIgaGVpZ2h0PSIzNiIgdmlld2JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Im0yMCAyMmwtMy44Ni0xLjU1Yy43LTEuNTMgMS4yLTMuMTEgMS41MS00Ljcyek03Ljg2IDIwLjQ1TDQgMjJsMi4zNS02LjI3Yy4zMSAxLjYxLjgxIDMuMTkgMS41MSA0LjcyTTEyIDJzNSAyIDUgMTBjMCAzLjEtLjc1IDUuNzUtMS42NyA3LjgzQTIgMiAwIDAgMSAxMy41IDIxaC0zYTIgMiAwIDAgMS0xLjgzLTEuMTdDNy43NiAxNy43NSA3IDE1LjEgNyAxMmMwLTggNS0xMCA1LTEwbTAgMTBjMS4xIDAgMi0uOSAyLTJzLS45LTItMi0ycy0yIC45LTIgMnMuOSAyIDIgMiIgLz48L3N2Zz4=)
 ![](data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNiIgaGVpZ2h0PSIzNiIgdmlld2JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik0xMiAyUzcgNCA3IDEyYzAgMy4xLjc2IDUuNzUgMS42NyA3LjgzQTIgMiAwIDAgMCAxMC41IDIxaDNhMiAyIDAgMCAwIDEuODMtMS4xN0MxNi4yNSAxNy43NSAxNyAxNS4xIDE3IDEyYzAtOC01LTEwLTUtMTBtMS41IDE3aC0zYy0xLTIuMjQtMS41LTQuNTktMS41LTdjMC00LjY0IDEuOS02LjggMy03LjY3YzEuMS44NyAzIDMuMDMgMyA3LjY3YzAgMi40MS0uNSA0Ljc2LTEuNSA3bTYuNSAzbC0zLjg2LTEuNTVjLjctMS41MyAxLjItMy4xMSAxLjUxLTQuNzJtLTkuNzkgNC43Mkw0IDIybDIuMzUtNi4yN2MuMzEgMS42MS44MSAzLjE5IDEuNTEgNC43Mk0xMiAxMmMtMS4xIDAtMi0uOS0yLTJzLjktMiAyLTJzMiAuOSAyIDJzLS45IDItMiAyIiAvPjwvc3ZnPg==)
@@ -217,33 +114,43 @@ tags$div(lapply(head(hits$id, 8), icon_cell, size = 36))
 ## Credits
 
 Using an icon means following its set’s license.
-[`iconify_license()`](https://noahweidig.github.io/iconifyr/reference/iconify_license.md)
-returns what you need for a credit line:
+[`iconify_sets()`](https://noahweidig.github.io/iconifyr/reference/iconify_sets.md)
+lists the license and author of every set, which is enough for a credit
+line:
 
 ``` r
 
-sets_used <- c(
-  "mdi", "tabler", "lucide", "ph", "bi", "carbon", "fa6-solid",
-  "fa6-brands", "simple-icons", "logos", "twemoji", "flat-color-icons"
-)
-lic <- lapply(sets_used, iconify_license, quiet = TRUE)
-data.frame(
-  prefix = vapply(lic, `[[`, "", "prefix"),
-  license = vapply(lic, `[[`, "", "license"),
-  author = vapply(lic, `[[`, "", "author"),
-  attribution = ifelse(vapply(lic, function(x) isTRUE(x$attribution_required), NA), "required", "-")
-)
-#>              prefix    license                     author attribution
-#> 1               mdi Apache 2.0              Pictogrammers           -
-#> 2            tabler        MIT                 Paweł Kuna           -
-#> 3            lucide        ISC        Lucide Contributors           -
-#> 4                ph        MIT             Phosphor Icons           -
-#> 5                bi        MIT      The Bootstrap Authors           -
-#> 6            carbon Apache 2.0                        IBM           -
-#> 7         fa6-solid  CC BY 4.0                 Dave Gandy    required
-#> 8        fa6-brands  CC BY 4.0                 Dave Gandy    required
-#> 9      simple-icons    CC0 1.0 Simple Icons Collaborators           -
-#> 10            logos        CC0                Gil Barbara           -
-#> 11          twemoji  CC BY 4.0                    Twitter    required
-#> 12 flat-color-icons        MIT                     Icons8           -
+credits <- sets
+credits$attribution <- ifelse(grepl("^(CC-BY|ODbL)", credits$license_spdx), "required", "-")
+credits[c("prefix", "name", "author", "license_title", "attribution")]
+#>              prefix                  name                     author
+#> 1               mdi Material Design Icons              Pictogrammers
+#> 2            tabler          Tabler Icons                 Paweł Kuna
+#> 3            lucide                Lucide        Lucide Contributors
+#> 4                ph              Phosphor             Phosphor Icons
+#> 5                bi       Bootstrap Icons      The Bootstrap Authors
+#> 6            carbon                Carbon                        IBM
+#> 7         fa6-solid  Font Awesome 6 Solid                 Dave Gandy
+#> 8        fa6-brands Font Awesome 6 Brands                 Dave Gandy
+#> 9      simple-icons          Simple Icons Simple Icons Collaborators
+#> 10            logos             SVG Logos                Gil Barbara
+#> 11          twemoji         Twitter Emoji                    Twitter
+#> 12 flat-color-icons      Flat Color Icons                     Icons8
+#>    license_title attribution
+#> 1     Apache 2.0           -
+#> 2            MIT           -
+#> 3            ISC           -
+#> 4            MIT           -
+#> 5            MIT           -
+#> 6     Apache 2.0           -
+#> 7      CC BY 4.0    required
+#> 8      CC BY 4.0    required
+#> 9        CC0 1.0           -
+#> 10           CC0           -
+#> 11     CC BY 4.0    required
+#> 12           MIT           -
 ```
+
+[`iconify_license()`](https://noahweidig.github.io/iconifyr/reference/iconify_license.md)
+returns the same data for one set, plus the license and author URLs, and
+prints a message when attribution is required.

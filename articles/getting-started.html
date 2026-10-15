@@ -645,7 +645,9 @@ a plot, rasterize the SVG and add it as an annotation.</p>
 <code>tools::R_user_dir("iconifyr", "cache")</code>. Turn this off with
 <code>options(iconifyr.cache = FALSE)</code>; wipe it with
 <code><a href="../reference/iconify_cache_clear.html">iconify_cache_clear()</a></code>.</li>
-<li>Requests retry up to 3 times on HTTP 429 and 5xx.</li>
+<li>Requests retry up to 3 times on HTTP 5xx, and on 429 when the API
+asks for a wait of 10 seconds or less. A longer <code>Retry-After</code>
+fails fast with an <code>iconifyr_rate_limited</code> error.</li>
 <li>Point the package at a self-hosted API with
 <code>options(iconifyr.api = "https://icons.example.org")</code>.</li>
 </ul>
