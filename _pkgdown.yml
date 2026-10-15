@@ -29,5 +29,6 @@ articles:
   - title: Guides
     navbar: ~
     contents:
+      - icon-gallery
       - getting-started
       - licensing
