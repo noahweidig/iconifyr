@@ -98,6 +98,8 @@ basename(paths)
 - Responses are cached under `tools::R_user_dir("iconifyr", "cache")`. Turn
   this off with `options(iconifyr.cache = FALSE)`; wipe it with
   `iconify_cache_clear()`.
-- Requests retry up to 3 times on HTTP 429 and 5xx.
+- Requests retry up to 3 times on HTTP 5xx, and on 429 when the API asks for
+  a wait of 10 seconds or less. A longer `Retry-After` fails fast with an
+  `iconifyr_rate_limited` error.
 - Point the package at a self-hosted API with
   `options(iconifyr.api = "https://icons.example.org")`.

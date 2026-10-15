@@ -28,10 +28,39 @@ iconify_request <- function(path, query = list()) {
   req <- httr2::req_retry(
     req,
     max_tries = 3,
-    is_transient = function(resp) httr2::resp_status(resp) %in% c(429L, 500:599),
+    is_transient = is_transient_response,
     backoff = function(i) 0.5 * 2^(i - 1)
   )
   httr2::req_error(req, is_error = function(resp) FALSE)
+}
+
+# Retry 5xx, and 429 only when the server asks for a short wait. A long
+# Retry-After (e.g. 300 s) fails fast instead of blocking the session.
+max_retry_wait <- 10
+
+is_transient_response <- function(resp) {
+  status <- httr2::resp_status(resp)
+  if (status == 429L) {
+    wait <- httr2::resp_retry_after(resp)
+    return(is.na(wait) || wait <= max_retry_wait)
+  }
+  status %in% 500:599
+}
+
+# httr2 reports each wait as a message ("Waiting 2s for retry backoff"),
+# which would end up in knitted output. Keep it for interactive use only.
+quiet_retry_messages <- function(expr) {
+  if (interactive()) {
+    return(expr)
+  }
+  withCallingHandlers(
+    expr,
+    message = function(m) {
+      if (grepl("retry backoff", conditionMessage(m), fixed = TRUE)) {
+        rlang::cnd_muffle(m)
+      }
+    }
+  )
 }
 
 # Perform a request and return the body as a string. `not_found` is the
@@ -44,7 +73,7 @@ iconify_fetch <- function(req, not_found, call = rlang::caller_env()) {
   }
 
   resp <- tryCatch(
-    httr2::req_perform(req),
+    quiet_retry_messages(httr2::req_perform(req)),
     error = function(e) {
       cli::cli_abort(
         c(
@@ -61,6 +90,18 @@ iconify_fetch <- function(req, not_found, call = rlang::caller_env()) {
   status <- httr2::resp_status(resp)
   if (status == 404L) {
     cli::cli_abort(not_found, class = "iconifyr_not_found", call = call, .envir = call)
+  }
+  if (status == 429L) {
+    wait <- httr2::resp_retry_after(resp)
+    cli::cli_abort(
+      c(
+        "The Iconify API is rate limiting requests (HTTP 429).",
+        i = if (!is.na(wait)) "It asks clients to wait {wait} seconds before retrying.",
+        i = "Wait and retry, or set {.code iconifyr.api} to a self-hosted API."
+      ),
+      class = "iconifyr_rate_limited",
+      call = call
+    )
   }
   if (status >= 400L) {
     cli::cli_abort(
