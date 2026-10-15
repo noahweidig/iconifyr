@@ -1,0 +1,70 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# iconifyr
+
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/noahweidig/iconifyr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/noahweidig/iconifyr/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
+iconifyr is an R client for the [Iconify
+API](https://iconify.design/docs/api/): 200,000+ icons from 200+
+open-source sets, as SVG, inline HTML or PNG. It supports self-hosted
+APIs, caches responses on disk, retries on 429/5xx, and tells you when a
+license requires attribution.
+
+## Installation
+
+``` r
+# install.packages("pak")
+pak::pak("noahweidig/iconifyr")
+```
+
+## Examples
+
+Get an icon as SVG (ids are `prefix:name`):
+
+``` r
+library(iconifyr)
+svg <- iconify_get("mdi:home", color = "#ba3329", size = 48)
+cat(svg)
+#> <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="#ba3329" d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8z"/></svg>
+```
+
+Search across sets:
+
+``` r
+head(iconify_search("home", prefixes = c("mdi", "tabler"), limit = 40))
+#>                     id prefix          name
+#> 1             mdi:home    mdi          home
+#> 2     mdi:home-outline    mdi  home-outline
+#> 3          tabler:home tabler          home
+#> 4   tabler:home-filled tabler   home-filled
+#> 5        tabler:home-2 tabler        home-2
+#> 6 tabler:home-2-filled tabler home-2-filled
+```
+
+Check a license before you use a set:
+
+``` r
+iconify_license("fa6-solid")
+#> ! "Font Awesome 6 Solid" ("fa6-solid") is licensed "CC BY 4.0": attribution is required. Credit "Dave Gandy".
+#> Font Awesome 6 Solid (fa6-solid)
+#>   License:              CC BY 4.0 (CC-BY-4.0)
+#>   License URL:          https://creativecommons.org/licenses/by/4.0/
+#>   Author:               Dave Gandy
+#>   Author URL:           https://github.com/FortAwesome/Font-Awesome
+#>   Attribution required: yes
+```
+
+Inline an icon in R Markdown, Quarto or Shiny with `iconify_html()`,
+save files with `iconify_download()`, or render a PNG with
+`iconify_png()`. See `vignette("getting-started")`.
+
+## Options
+
+| Option           | Default                        | Purpose                                                        |
+|------------------|--------------------------------|----------------------------------------------------------------|
+| `iconifyr.api`   | `"https://api.iconify.design"` | API base URL (self-hosted APIs)                                |
+| `iconifyr.cache` | `TRUE`                         | Cache responses under `tools::R_user_dir("iconifyr", "cache")` |

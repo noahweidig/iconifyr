@@ -1,0 +1,65 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-"
+)
+options(iconifyr.cache = FALSE)
+```
+
+# iconifyr
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/noahweidig/iconifyr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/noahweidig/iconifyr/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
+iconifyr is an R client for the [Iconify API](https://iconify.design/docs/api/):
+400,000+ icons from 240+ open-source sets, as SVG, inline HTML or PNG. It
+supports self-hosted APIs, caches responses on disk, retries on 429/5xx, and
+tells you when a license requires attribution.
+
+## Installation
+
+```r
+# install.packages("pak")
+pak::pak("noahweidig/iconifyr")
+```
+
+## Examples
+
+Get an icon as SVG (ids are `prefix:name`):
+
+```{r get}
+library(iconifyr)
+svg <- iconify_get("mdi:home", color = "#ba3329", size = 48)
+cat(svg)
+```
+
+Search across sets:
+
+```{r search}
+head(iconify_search("home", prefixes = c("mdi", "tabler"), limit = 40))
+```
+
+Check a license before you use a set:
+
+```{r license}
+iconify_license("fa6-solid")
+```
+
+Inline an icon in R Markdown, Quarto or Shiny with `iconify_html()`, save files
+with `iconify_download()`, or render a PNG with `iconify_png()`. See
+`vignette("getting-started")`.
+
+## Options
+
+| Option | Default | Purpose |
+|---|---|---|
+| `iconifyr.api` | `"https://api.iconify.design"` | API base URL (self-hosted APIs) |
+| `iconifyr.cache` | `TRUE` | Cache responses under `tools::R_user_dir("iconifyr", "cache")` |
