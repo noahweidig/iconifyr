@@ -13,7 +13,6 @@ vignette: >
 live <- identical(Sys.getenv("ICONIFYR_LIVE_VIGNETTES"), "true")
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = live)
 library(iconifyr)
-options(iconifyr.cache = FALSE)
 ```
 
 iconifyr wraps the [Iconify API](https://iconify.design/docs/api/). Icons are
