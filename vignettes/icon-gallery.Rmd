@@ -1,0 +1,135 @@
+---
+title: "Icon gallery"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Icon gallery}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+# Chunks call the live Iconify API, so they only run when asked to
+# (the pkgdown workflow sets this variable).
+live <- identical(Sys.getenv("ICONIFYR_LIVE_VIGNETTES"), "true")
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = live)
+library(iconifyr)
+library(htmltools)
+options(iconifyr.cache = FALSE)
+
+icon_cell <- function(id, size = 40, ...) {
+  tags$span(
+    title = id,
+    style = "display: inline-block; margin: 0 0.6em 0.4em 0;",
+    iconify_html(id, size = size, ...)
+  )
+}
+
+gallery <- function(spec) {
+  sets <- iconify_sets()
+  rows <- lapply(names(spec), function(p) {
+    info <- sets[sets$prefix == p, ]
+    tags$tr(
+      tags$td(tags$strong(info$name), tags$br(), tags$code(p)),
+      tags$td(info$license_spdx),
+      tags$td(lapply(paste0(p, ":", spec[[p]]), icon_cell))
+    )
+  })
+  tags$table(
+    class = "table",
+    tags$thead(tags$tr(tags$th("Icon set"), tags$th("License"), tags$th("Icons"))),
+    tags$tbody(rows)
+  )
+}
+```
+
+Iconify hosts 240+ icon sets behind one API. Every icon below was fetched live
+with `iconify_html()`. Hover over an icon to see its id; pass it to
+`iconify_get()` to get the SVG.
+
+## Same idea, different sets
+
+Seven sets, each with its own drawing style and license. Monotone icons take the
+surrounding text color, so they follow light and dark themes.
+
+```{r same-idea}
+gallery(list(
+  mdi = c("home", "rocket-launch", "chart-line", "github"),
+  tabler = c("brand-github", "map-pin", "leaf", "bolt"),
+  lucide = c("camera", "sun", "leaf", "map"),
+  ph = c("airplane", "tree", "map-pin", "chart-bar"),
+  bi = c("globe", "tree", "bicycle", "graph-up"),
+  carbon = c("earth", "chart-line", "map", "tree"),
+  `fa6-solid` = c("tree", "earth-americas", "chart-simple", "bicycle")
+))
+```
+
+## Brand logos
+
+```{r brands}
+gallery(list(
+  `fa6-brands` = c("r-project", "github", "python", "docker"),
+  `simple-icons` = c("rstudioide", "quarto", "github", "posit"),
+  logos = c("r-lang", "github-icon", "python", "docker-icon")
+))
+```
+
+## Multicolor sets
+
+`color` only recolors monotone icons. Emoji and flat-color sets keep their own
+palette.
+
+```{r multicolor}
+gallery(list(
+  twemoji = c("globe-showing-americas", "seedling", "bar-chart", "rocket"),
+  `flat-color-icons` = c("globe", "combo-chart", "camera")
+))
+```
+
+## Color, size, flip and rotate
+
+One icon, many variations:
+
+```{r variations}
+id <- "mdi:rocket-launch"
+tags$div(
+  icon_cell(id, color = "#e63946"),
+  icon_cell(id, color = "#2a9d8f"),
+  icon_cell(id, color = "#457b9d", size = 64),
+  icon_cell(id, color = "#f4a261", flip = "horizontal"),
+  icon_cell(id, color = "#8d5fd3", rotate = 90),
+  icon_cell(id, color = "#264653", rotate = 180, flip = "vertical")
+)
+```
+
+```r
+iconify_html("mdi:rocket-launch", color = "#f4a261", flip = "horizontal")
+iconify_html("mdi:rocket-launch", color = "#8d5fd3", rotate = 90)
+```
+
+## Pick an icon from search results
+
+```{r search}
+hits <- iconify_search("rocket", prefixes = c("mdi", "tabler", "ph", "lucide"), limit = 32)
+head(hits, 8)
+
+tags$div(lapply(head(hits$id, 8), icon_cell, size = 36))
+```
+
+## Credits
+
+Using an icon means following its set's license. `iconify_license()` returns
+what you need for a credit line:
+
+```{r credits}
+sets_used <- c(
+  "mdi", "tabler", "lucide", "ph", "bi", "carbon", "fa6-solid",
+  "fa6-brands", "simple-icons", "logos", "twemoji", "flat-color-icons"
+)
+lic <- lapply(sets_used, iconify_license, quiet = TRUE)
+data.frame(
+  prefix = vapply(lic, `[[`, "", "prefix"),
+  license = vapply(lic, `[[`, "", "license"),
+  author = vapply(lic, `[[`, "", "author"),
+  attribution = ifelse(vapply(lic, function(x) isTRUE(x$attribution_required), NA), "required", "-")
+)
+```

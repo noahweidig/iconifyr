@@ -55,7 +55,8 @@ iconify_license("fa6-solid")
 
 Inline an icon in R Markdown, Quarto or Shiny with `iconify_html()`, save files
 with `iconify_download()`, or render a PNG with `iconify_png()`. See
-`vignette("getting-started")`.
+`vignette("getting-started")` and the
+[icon gallery](https://noahweidig.github.io/iconifyr/articles/icon-gallery.html).
 
 ## Options
 
