@@ -1,0 +1,33 @@
+url: https://noahweidig.github.io/iconifyr/
+
+template:
+  bootstrap: 5
+
+reference:
+  - title: Get icons
+    desc: Fetch icons as SVG, files, inline HTML or PNG.
+    contents:
+      - iconify_get
+      - iconify_download
+      - iconify_html
+      - iconify_png
+  - title: Search and browse
+    desc: Find icons and list icon sets.
+    contents:
+      - iconify_search
+      - iconify_sets
+      - iconify_icons
+  - title: Licensing
+    desc: Check licenses and attribution requirements.
+    contents:
+      - iconify_license
+  - title: Utilities
+    contents:
+      - iconify_cache_clear
+
+articles:
+  - title: Guides
+    navbar: ~
+    contents:
+      - getting-started
+      - licensing
