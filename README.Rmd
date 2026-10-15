@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 options(iconifyr.cache = FALSE)
 ```
 
-# iconifyr
+# iconifyr <img src="man/figures/logo.png" align="right" height="139" alt="iconifyr hex logo" />
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/noahweidig/iconifyr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/noahweidig/iconifyr/actions/workflows/R-CMD-check.yaml)
