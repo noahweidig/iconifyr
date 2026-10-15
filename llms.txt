@@ -1,7 +1,7 @@
 # iconifyr
 
 iconifyr is an R client for the [Iconify
-API](https://iconify.design/docs/api/): 200,000+ icons from 200+
+API](https://iconify.design/docs/api/): 400,000+ icons from 240+
 open-source sets, as SVG, inline HTML or PNG. It supports self-hosted
 APIs, caches responses on disk, retries on 429/5xx, and tells you when a
 license requires attribution.
