@@ -1,7 +1,7 @@
-fake_resp <- function(body = "", status = 200L, type = "application/json") {
+fake_resp <- function(body = "", status = 200L, type = "application/json", headers = list()) {
   httr2::response(
     status_code = status,
-    headers = list(`Content-Type` = type),
+    headers = c(list(`Content-Type` = type), headers),
     body = charToRaw(body)
   )
 }

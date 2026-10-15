@@ -65,6 +65,24 @@ test_that("requests retry on 429 and 5xx only", {
   }
 })
 
+test_that("a long Retry-After on 429 is not waited out", {
+  transient <- iconify_request("search")$policies$retry_is_transient
+  expect_true(transient(fake_resp("", 429L, headers = list(`Retry-After` = "2"))))
+  expect_false(transient(fake_resp("", 429L, headers = list(`Retry-After` = "300"))))
+
+  local_no_cache()
+  httr2::local_mocked_responses(function(req) {
+    fake_resp("", 429L, "text/plain", headers = list(`Retry-After` = "300"))
+  })
+  expect_error(iconify_get("mdi:home"), class = "iconifyr_rate_limited")
+  expect_error(iconify_get("mdi:home"), "300 seconds")
+})
+
+test_that("httr2 retry-wait messages are muffled when not interactive", {
+  expect_no_message(quiet_retry_messages(message("Waiting 3s for retry backoff")))
+  expect_message(quiet_retry_messages(message("something else")), "something else")
+})
+
 test_that("the api option overrides the base url", {
   local_no_cache()
   withr::local_options(iconifyr.api = "https://icons.example.org/v1/")

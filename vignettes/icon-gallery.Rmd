@@ -14,7 +14,8 @@ live <- identical(Sys.getenv("ICONIFYR_LIVE_VIGNETTES"), "true")
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = live)
 library(iconifyr)
 library(htmltools)
-options(iconifyr.cache = FALSE)
+# Responses are cached on disk, so rebuilding the site reuses them.
+sets <- if (live) iconify_sets()
 
 icon_cell <- function(id, size = 40, ...) {
   tags$span(
@@ -25,7 +26,6 @@ icon_cell <- function(id, size = 40, ...) {
 }
 
 gallery <- function(spec) {
-  sets <- iconify_sets()
   rows <- lapply(names(spec), function(p) {
     info <- sets[sets$prefix == p, ]
     tags$tr(
@@ -117,19 +117,18 @@ tags$div(lapply(head(hits$id, 8), icon_cell, size = 36))
 
 ## Credits
 
-Using an icon means following its set's license. `iconify_license()` returns
-what you need for a credit line:
+Using an icon means following its set's license. `iconify_sets()` lists the
+license and author of every set, which is enough for a credit line:
 
 ```{r credits}
 sets_used <- c(
   "mdi", "tabler", "lucide", "ph", "bi", "carbon", "fa6-solid",
   "fa6-brands", "simple-icons", "logos", "twemoji", "flat-color-icons"
 )
-lic <- lapply(sets_used, iconify_license, quiet = TRUE)
-data.frame(
-  prefix = vapply(lic, `[[`, "", "prefix"),
-  license = vapply(lic, `[[`, "", "license"),
-  author = vapply(lic, `[[`, "", "author"),
-  attribution = ifelse(vapply(lic, function(x) isTRUE(x$attribution_required), NA), "required", "-")
-)
+credits <- sets[match(sets_used, sets$prefix), ]
+credits$attribution <- ifelse(grepl("^(CC-BY|ODbL)", credits$license_spdx), "required", "-")
+credits[c("prefix", "name", "author", "license_title", "attribution")]
 ```
+
+`iconify_license()` returns the same data for one set, plus the license and
+author URLs, and prints a message when attribution is required.
