@@ -86,15 +86,16 @@ needs_attribution <- function(spdx, title) {
 
 #' @export
 print.iconify_license <- function(x, ...) {
-  cli::cli_text("{.strong {x$set}} ({.val {x$prefix}})")
-  cli::cli_dl(c(
-    License = if (is.na(x$license)) "unknown" else x$license,
-    SPDX = if (is.na(x$spdx)) "unknown" else x$spdx,
-    `License URL` = if (is.na(x$url)) "unknown" else x$url,
-    Author = if (is.na(x$author)) "unknown" else x$author,
-    `Author URL` = if (is.na(x$author_url)) "unknown" else x$author_url,
-    `Attribution required` = if (is.na(x$attribution_required)) "unknown" else
-      if (x$attribution_required) "yes" else "no"
-  ))
+  or_unknown <- function(v) if (is.na(v)) "unknown" else v
+  attr_txt <- if (is.na(x$attribution_required)) "unknown" else if (x$attribution_required) "yes" else "no"
+  cat(
+    sprintf("%s (%s)\n", x$set, x$prefix),
+    sprintf("  License:              %s (%s)\n", or_unknown(x$license), or_unknown(x$spdx)),
+    sprintf("  License URL:          %s\n", or_unknown(x$url)),
+    sprintf("  Author:               %s\n", or_unknown(x$author)),
+    sprintf("  Author URL:           %s\n", or_unknown(x$author_url)),
+    sprintf("  Attribution required: %s\n", attr_txt),
+    sep = ""
+  )
   invisible(x)
 }
